@@ -1,6 +1,20 @@
 import React from 'react';
 import { useState } from "react";
 import axios from 'axios';
+import styled from '@emotion/styled'
+
+const Button = styled.button`
+  padding: 4px;
+  cursor: pointer;
+  background-color: #FB6C6B;
+  font-size: 14px;
+  border-radius: 4px;
+  color: black;
+  font-weight: bold;
+  &:hover {
+    color: white;
+  }
+`
 
 export const useForm = (callback: any, initialState = {}) => {
 
@@ -71,7 +85,7 @@ function NewTask() {
                     placeholder='Description'
                     onChange={onChange}
                     required
-                    /> <button type='submit'>Add Task</button>
+                    /> <Button type='submit'>Add Task</Button>
             </div>
         </form>
     );
