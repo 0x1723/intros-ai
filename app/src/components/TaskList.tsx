@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import ActionButton from './Button';
 
 interface ITask {
   id: number;
@@ -8,6 +9,16 @@ interface ITask {
 }
 
 const defaultTasks:ITask[] = [];
+
+async function DeleteTask(id: String){
+  axios
+      .delete("http://localhost:8888/tasks/" + id);
+}
+
+async function UpdateTask(id: String){
+  axios
+      .post("http://localhost:8888/tasks/" + id);
+}
 
 function TaskList() {
 
@@ -43,7 +54,7 @@ function TaskList() {
           {tasks.map((task) => (
             <li key={task.id}>
                 <p>
-                    {task.completed ? <del>{task.description}</del> : task.description}
+                    {task.completed ? <ActionButton onClick={async () => {await UpdateTask(task.id.toString());}} children={"Uncomplete"}/>  : <ActionButton onClick={async () => {await UpdateTask(task.id.toString());}} children={"Complete"}/> } <ActionButton onClick={async () => {await DeleteTask(task.id.toString());}} children={"Delete"}/> {task.completed ? <del>{task.description}</del> : task.description}
                 </p>
             </li>
           ))}
