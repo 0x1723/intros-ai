@@ -2,6 +2,8 @@
 
 ## Runinng the application
 
+The best way to review the work so that it's easy to understand is to follow the commit history as I made sure to built it accordingly.
+
 ### Docker Compose
 
 Included a `docker-compose.yml` file that can be used to build and spin up the three docker containers needed for the app:
