@@ -76,3 +76,20 @@ def delete(table, id):
      affected_rows = cursorObject.execute(delete_statement)
      database.commit()
      return affected_rows
+
+def update_bool(table, id, column):
+     """Update a boolean column to its opposite in a table provided for a row provided its ID
+
+     Args:
+         table (String): The table to update
+         id (Int): The ID of the row to update
+         column (String): The column to update
+
+     Returns:
+         Int: The affected rows by the update statement, 1 if a row was updated and 0 if not
+     """
+     cursorObject = database.cursor()
+     update_statement = "UPDATE {} SET {} = NOT {} WHERE id = {}".format(table, column, column, id)
+     affected_rows = cursorObject.execute(update_statement)
+     database.commit()
+     return affected_rows

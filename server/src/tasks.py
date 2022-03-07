@@ -1,5 +1,5 @@
 import tornado.web
-from database import insert, select, delete
+from database import insert, select, delete, update_bool
 import json
 import traceback
 
@@ -41,6 +41,14 @@ class TaskHandler(tornado.web.RequestHandler):
         try:
             task_id = int(self.request.path.replace("/tasks/", ""))
             rows = delete("tasks", task_id)
+            self.write(json.dumps(rows))
+        except Exception as e:
+            self.write(traceback.format_exc())
+
+    def post(self):
+        try:
+            task_id = int(self.request.path.replace("/tasks/", ""))
+            rows = update_bool("tasks", task_id, "completed")
             self.write(json.dumps(rows))
         except Exception as e:
             self.write(traceback.format_exc())
