@@ -49,3 +49,4 @@ Given more time, I'd do the following improvements:
 - Manage the React app state better to not have to refresh the page after each action.
 - For the task creation, change it so that we don't use the form and submit type button but use simply an action button like the other buttons.
 - Improve error handling both on the backend and frontend.
+- Add the date components, both in the frontend and backend, so that each entry shows a date when it was added to the list, and a date at which it was last edited. I completely missed this part until the end.
