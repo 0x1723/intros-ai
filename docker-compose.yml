@@ -5,3 +5,21 @@ services:
     build: server/
     ports:
       - "8888:8888"
+    environment:
+      - DB_HOST=host.docker.internal
+      - DB_PASSWORD=NOT_SO_STRONG_PASSWORD
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    platform: linux/x86_64
+    environment:
+      - MYSQL_ROOT_PASSWORD=NOT_SO_STRONG_PASSWORD
+    image: "mysql:8.0"
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
