@@ -1,5 +1,5 @@
 import tornado.web
-from database import select
+from database import insert, select
 import json
 import traceback
 
@@ -16,3 +16,16 @@ class TasksHandler(tornado.web.RequestHandler):
             self.write(json.dumps(rows))
         except Exception as e:
             self.write(traceback.format_exc())
+
+    def post(self):
+        try:
+            data = tornado.escape.json_decode(self.request.body)
+            if "description" not in data:
+                raise Exception("The data posted needs to have a description key")
+            insert("tasks", ["description"], [data["description"]])
+            self.write("Task {} added!".format(data["description"]))
+        except Exception as e:
+            self.write(traceback.format_exc())
+
+    def options(self):
+        pass

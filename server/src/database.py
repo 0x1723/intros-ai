@@ -15,6 +15,23 @@ database = pymysql.connect(
      db=DB_DATABASE
 )
 
+def insert(table, columns, values):
+     """Insert rows into a given table
+
+     Args:
+         table (String): The table to add the rows to
+         columns (List of Strings): The column names
+         values (List of Strings): The values
+
+     Returns:
+         Int: The number of rows affected by the insert statement
+     """
+     cursorObject = database.cursor()
+     insert_statement = "INSERT INTO {} ({}) VALUES ('{}')".format(table, ", ".join(columns), ", ".join(values))
+     affected_rows = cursorObject.execute(insert_statement)
+     database.commit()
+     return affected_rows
+
 # columns can either take the list of columns to select or an empty list or None to select all columns
 def select(table, columns=None):
      """Select rows from a given table
