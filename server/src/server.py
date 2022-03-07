@@ -1,6 +1,6 @@
 import tornado.ioloop
 import tornado.web
-from tasks import TasksHandler
+from tasks import TasksHandler, TaskHandler
 
 class MainHandler(tornado.web.RequestHandler):
 
@@ -11,6 +11,7 @@ def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
         (r"/tasks", TasksHandler),
+        (r"/tasks/\d+", TaskHandler),
     ])
 
 if __name__ == "__main__":

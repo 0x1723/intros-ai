@@ -60,3 +60,19 @@ def select(table, columns=None):
                record[field_names[i]] = row[i]
           rows_list.append(record)
      return rows_list
+
+def delete(table, id):
+     """Delete one row from a table provided its ID
+
+     Args:
+         table (String): The table to delete from
+         id (Int): The ID of the row to delete
+
+     Returns:
+         Int: The affected rows by the delete statement, 1 if a row was deleted and 0 if not
+     """
+     cursorObject = database.cursor()
+     delete_statement = "DELETE FROM {} WHERE id={}".format(table, id)
+     affected_rows = cursorObject.execute(delete_statement)
+     database.commit()
+     return affected_rows
