@@ -44,3 +44,6 @@ class TaskHandler(tornado.web.RequestHandler):
             self.write(json.dumps(rows))
         except Exception as e:
             self.write(traceback.format_exc())
+
+    def options(self):
+        pass
